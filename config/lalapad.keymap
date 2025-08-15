@@ -168,37 +168,37 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
             label = "PLS_MINUS";
         };
-        allow_pageup: allow_pageup {
+        up_pageup: up_pageup {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp UP>, <&kp PAGE_UP>;
 
             mods = <(MOD_LCTL|MOD_RCTL)>;
-            label = "ALLOW_PAGEUP";
+            label = "UP_PAGEUP";
         };
-        allow_pagedown: allow_pagedown {
+        down_pagedown: down_pagedown {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp DOWN>, <&kp PAGE_DOWN>;
 
             mods = <(MOD_LCTL|MOD_RCTL)>;
-            label = "ALLOW_PAGEDOWN";
+            label = "DOWN_PAGEDOWN";
         };
-        allow_home: allow_home {
+        left_home: left_home {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp LEFT>, <&kp HOME>;
 
             mods = <(MOD_LCTL|MOD_RCTL)>;
-            label = "ALLOW_HOME";
+            label = "LEFT_HOME";
         };
-        allow_end: allow_end {
+        right_end: right_end {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp RIGHT>, <&kp END>;
 
             mods = <(MOD_LCTL|MOD_RCTL)>;
-            label = "ALLOW_END";
+            label = "RIGHT_END";
         };
         mt2: mod_tap2 {
             compatible = "zmk,behavior-hold-tap";
@@ -278,9 +278,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &kp ESC                                &mo LOWER    &mt LGUI TAB &none                        &none         &mtb RSHFT SPACE &mo RAISE                          &kp RGUI     &none          &none
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &allow_end  &allow_pagedown &allow_home &allow_pageup                                          &allow_pageup &allow_home &allow_pagedown &allow_end
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &right_end  &down_pagedown &left_home  &up_pageup                                                                        &up_pageup   &left_home   &down_pagedown &right_end
             >;
         };
 
@@ -300,9 +300,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &kp SPACE                           &lt ADJUST MY_DOT &mt LGUI BSPC &none                     &bootloader   &none        &none                                  &trans       &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -321,9 +321,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &none                                  &none        &none        &bootloader                  &none         &mtb RSHFT RET &mo ADJUST                           &trans       &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -340,9 +340,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   LOCK         &none        &none                                  &none        &none        &none                        &mkp MCLK     &mkp LCLK     &mkp RCLK                             &trans       &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -358,9 +358,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &none                                  &none        &none        &none                        &none         &none        &none                                  &none        &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -376,9 +376,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &none                                  &none        &none        &none                        &none         &none        &none                                  &none        &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -394,9 +394,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &none                                  &none        &none        &none                        &none         &none        &none                                  &none        &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
 
@@ -412,9 +412,9 @@
 //├────────────┼────────────┼────────────┼────────────┴────────────┼────────────┼────────────╮           |                |             ╭────────────┼────────────┼────────────┴────────────┼────────────┼──────────────┼──────────────┤
   &none        &none        &none                                  &none        &none        &none                        &none         &none        &none                                  &none        &none          &none 
 //╰────────────┴────────────┴────────────╯                         ╰────────────┴────────────╯ ──────────╯                ╰──────────── ╰────────────┴────────────╯                         ╰────────────┴──────────────┴──────────────╯
-//                                       | D-Pad LEFT                                        |                                          | D-Pad RIGHT                                       |
-//                                       | RIGHT     | DOWN        | LEFT       | UP         |                                          | UP         | LEFT       | DOWN       | RIGHT      |
-                                         &trans      &trans        &trans       &trans                                                  &trans       &trans       &trans       &trans
+//                          | D-Pad LEFT                                        |                                                                    | D-Pad RIGHT                                       |
+//                          | RIGHT     | DOWN        | LEFT       | UP         |                                                                    | UP         | LEFT       | DOWN       | RIGHT      |
+                            &trans      &trans        &trans       &trans                                                                            &trans       &trans       &trans       &trans
             >;
         };
     };
