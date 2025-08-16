@@ -3,6 +3,9 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
+
+// Mouse Scroll Value
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 #include <dt-bindings/zmk/pointing.h>
 
 #define DEFAULT   0
@@ -66,9 +69,6 @@
 #define CAP_2       LG(LS(N4))
 #define CAP_3       LG(LS(N5))
 #define LOCK        &kp LG(LC(Q))
-
-// Mouse Scroll Value
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 
 // cirque trackpad input&layer control
 &glidepoint_listener_R {
