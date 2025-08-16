@@ -255,6 +255,102 @@
             hold-trigger-key-positions = <DPAD THUMBS LEFT_KEYS>;
             hold-trigger-on-release;
         };
+
+        enc_shift_ctrl_n: encorder_shift_ctrl_negative {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_RIGHT>, <&kp LS(LC(TAB))>;
+
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        enc_shift_ctrl_p: encorder_shift_ctrl_positive {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_LEFT>, <&kp LC(TAB)>;
+
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        enc_alt_ctrl_n: encorder_alt_ctrl_negative {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT>, <&kp UP>;
+
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        enc_alt_ctrl_p: encorder_alt_ctrl_positive {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp RIGHT>, <&kp DOWN>;
+
+            mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        enc_shift_alt_ctrl_n: encorder_shift_alt_ctrl_negative {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&enc_shift_ctrl_n>, <&enc_alt_ctrl_n>;
+
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+
+        enc_shift_alt_ctrl_p: encorder_shift_alt_ctrl_positive {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&enc_shift_ctrl_p>, <&enc_alt_ctrl_p>;
+
+            mods = <(MOD_LALT|MOD_RALT)>;
+        };
+
+        enc_all_modifiers_n: encorder_all_modifiers_negative {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&enc_shift_alt_ctrl_n>, <&kp LS(LG(TAB))>;
+
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+            keep-mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
+
+        enc_all_modifiers_p: encorder_all_modifiers_positive {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&enc_shift_alt_ctrl_p>, <&kp LG(TAB)>;
+
+            mods = <(MOD_LGUI|MOD_RGUI)>;
+            keep-mods = <(MOD_LGUI|MOD_RGUI)>;
+        };
+
+        enc_negative: encorder_nagative {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&enc_all_modifiers_n>;
+
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT|MOD_LCTL|MOD_RCTL|MOD_LGUI|MOD_RGUI)>;
+        };
+
+        enc_positive: encorder_positive {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&enc_all_modifiers_p>;
+
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT|MOD_LCTL|MOD_RCTL|MOD_LGUI|MOD_RGUI)>;
+        };
+
+        enc_root: encorder_root {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&enc_negative>, <&enc_positive>;
+
+            tap-ms = <20>;
+        };
+
+        enc_var: encorder_variable {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        };
     };
 
     combo {
@@ -289,7 +385,7 @@
 
         DEFAULT {
             display-name = "Default";
-            sensor-bindings = <&scroll_down_up>,<&scroll_up_down>;
+            sensor-bindings = <&enc_root>,<&enc_root>;
             bindings = <
 //╭────────────┬────────────┬────────────┬────────────┬────────────┬────────────╮                                                                    ╭────────────┬────────────┬────────────┬────────────┬──────────────┬──────────────╮
 //|            |  Q         |  W         |  E         |  R         |  T         |                                                                    |  Y         |  U         |  I         | O          |  P           |              |
@@ -311,7 +407,7 @@
 
         RAISE {
             display-name = "raise_layer";
-            sensor-bindings = <&scroll_left_right>,<&scroll_left_right>;
+            sensor-bindings = <&enc_var LG(MINUS) LG(PLUS)>,<&enc_var LG(MINUS) LG(PLUS)>;
             bindings = <
 //╭────────────┬────────────┬────────────┬────────────┬────────────┬────────────╮                                                                    ╭────────────┬────────────┬────────────┬────────────┬──────────────┬──────────────╮
 //|            |  /         |  7         |  8         |  9         |  -         |                                                                    |            |            |            |            |  -           |              |
@@ -333,6 +429,7 @@
 
         LOWER {
             display-name = "lower_layer";
+            sensor-bindings = <&enc_var C_BRI_DN C_BRI_UP>,<&enc_var C_BRI_DN C_BRI_UP>;
             bindings = <
 //╭────────────┬────────────┬────────────┬────────────┬────────────┬────────────╮                                                                    ╭────────────┬────────────┬────────────┬────────────┬──────────────┬──────────────╮
 //|            |  ?         |  "         |  !         |            |  ~         |                                                                    |            |  _         |  (         |  )         |  %           |              |
@@ -354,7 +451,7 @@
 
         ADJUST {
             display-name = "adjust_layer";
-            sensor-bindings = <&scroll_down_up>,<&volume_up_down>;
+            sensor-bindings = <&enc_var C_VOL_DN C_VOL_UP>,<&enc_var C_VOL_DN C_VOL_UP>;
             bindings = <
 //╭────────────┬────────────┬────────────┬────────────┬────────────┬────────────╮                                                                    ╭────────────┬────────────┬────────────┬────────────┬──────────────┬──────────────╮
   &trans       &kp C_MUTE   &kp F7       &kp F8       &kp F9       &kp F12                                                                        &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &kp CAP_3    &kp CAP_1
