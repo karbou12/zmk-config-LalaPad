@@ -119,6 +119,7 @@
 / {
 
     behaviors {
+        // for D-Pad
         up_pageup: up_pageup {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -185,6 +186,13 @@
             hold-trigger-on-release;
         };
 
+        // for rotary encorder
+        // default    : down/up scroll
+        // w/shift    : left/right scroll
+        // w/alt      : left/right. w/shift : selectable
+        // w/alt+ctrl : down/up.    w/shift : selectable
+        // w/ctrl     : switch tab
+        // w/gui      : switch app
         enc_shift_ctrl_n: encorder_shift_ctrl_negative {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -284,24 +292,28 @@
 
     combo {
         compatible = "zmk,combos";
+        // left and right shift for 40% keyboard layout
         combo_capsword_40 {
             timeout-ms = <50>;
             key-positions = <24 35>;
             bindings = <&caps_word>;
         };
 
+        // left and right shift for 30% keyboard layout
         combo_capsword_30 {
             timeout-ms = <50>;
             key-positions = <25 34>;
             bindings = <&caps_word>;
         };
 
+        // left thumbs
         combo_esc {
             timeout-ms = <50>;
             key-positions = <39 40>;
             bindings = <&kp ESC>;
         };
 
+        // right thumbs
         combo_rgui {
             timeout-ms = <50>;
             key-positions = <43 44>;
